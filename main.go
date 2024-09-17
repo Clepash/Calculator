@@ -22,10 +22,6 @@ func multiply(a int, b int) int {
 }
 
 func divide(a int, b int) int {
-	if b == 0 {
-		fmt.Println("Ошибка: деление на ноль!")
-		return 0
-	}
 	return a / b
 }
 
@@ -109,14 +105,12 @@ func main() {
 
 	if found_a_arab == true && found_b_arab == true || found_a_rom != 0 && found_b_rom != 0 {
 	} else {
-		fmt.Print("Можно использовать либо только арабские, либо только римские числа от 1 до 10 включительно.")
-		return
+		panic("Можно использовать либо только арабские, либо только римские числа от 1 до 10 включительно.")
 	}
 
 	if found_operation == true {
 	} else {
-		fmt.Println("Недопустимая операция")
-		return
+		panic("Недопустимая операция")
 	}
 
 	//Ну и наконец решаем пример
@@ -157,12 +151,14 @@ func main() {
 		case "/":
 			result = divide(a_int, b_int)
 		}
+
 		if result < 0 {
-			fmt.Println("В римской системе счета отсутствуют отрицательные числа")
-		} else {
+			panic("В римской системе счета отсутствуют отрицательные числа")
+		} else if result > 0 {
 			result := trans_to_rom(result)
 			fmt.Println(result)
+		} else {
+			panic("В римской системе счета отсутствует ноль")
 		}
-
 	}
 }
